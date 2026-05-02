@@ -1,0 +1,649 @@
+Aqui está o site completo seguindo fielmente a identidade visual do Poker de Quinta, com a logo centralizada, o novo botão "Impressão de QR CODE" e ícones coloridos e mais bonitos.
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Poker de Quinta | Central de Links Oficial</title>
+    <meta name="description" content="Acesse todos os links oficiais do Poker de Quinta: Site Oficial, Caderno do Dealer, Caixa, Valores, Gerador de Código, PIX e Impressão de QR Code.">
+    <!-- Google Fonts: Montserrat (títulos/destaques) + Inter (textos corridos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* PALETA DE CORES - Fundo principal: gradiente #0a0c12 a #12161f */
+            background: linear-gradient(145deg, #0a0c12 0%, #12161f 100%);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #eef2ff;
+            padding: 1.5rem 1rem 3rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 580px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ===== HEADER COM LOGO NO CENTRO SUPERIOR ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeSlideDown 0.5s ease-out;
+        }
+
+        .logo-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            border-radius: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Fallback automático caso a imagem não carregue */
+        .logo-fallback {
+            display: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFD966, #FFB347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #FFD966;
+            background: rgba(0, 0, 0, 0.4);
+            display: inline-block;
+            padding: 5px 18px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== GRADE DE BOTÕES ===== */
+        .buttons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem;
+        }
+
+        /* ESTILO DOS BOTÕES - glassmorphism, bordas arredondadas, sombras */
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(20, 25, 38, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 80px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        /* ÍCONES COLORIDOS E MAIS BONITOS - 48x48px com gradientes e cores vibrantes */
+        .btn-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        /* Cores específicas para cada ícone conforme identidade visual */
+        .icon-site { background: linear-gradient(135deg, rgba(255, 217, 102, 0.25), rgba(255, 179, 71, 0.2)); }
+        .icon-caderno { background: linear-gradient(135deg, rgba(102, 217, 255, 0.25), rgba(71, 150, 255, 0.2)); }
+        .icon-caixa { background: linear-gradient(135deg, rgba(102, 255, 163, 0.25), rgba(71, 200, 100, 0.2)); }
+        .icon-valores { background: linear-gradient(135deg, rgba(255, 102, 204, 0.25), rgba(200, 71, 150, 0.2)); }
+        .icon-gerador { background: linear-gradient(135deg, rgba(255, 140, 102, 0.3), rgba(255, 100, 71, 0.25)); }
+        .icon-pix { background: linear-gradient(135deg, rgba(102, 255, 217, 0.25), rgba(71, 200, 180, 0.2)); }
+        .icon-qrcode { background: linear-gradient(135deg, rgba(179, 102, 255, 0.25), rgba(140, 71, 200, 0.2)); }
+
+        .btn-icon svg {
+            width: 26px;
+            height: 26px;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+
+        /* Cores dos SVGs */
+        .icon-site svg { stroke: #FFD966; fill: none; stroke-width: 1.8; }
+        .icon-caderno svg { stroke: #66D9FF; fill: none; stroke-width: 1.8; }
+        .icon-caixa svg { stroke: #66FFA3; fill: none; stroke-width: 1.8; }
+        .icon-valores svg { stroke: #FF66CC; fill: none; stroke-width: 1.8; }
+        .icon-gerador svg { fill: #FF8C66; stroke: #FF8C66; stroke-width: 1.5; }
+        .icon-pix svg { stroke: #66FFD9; fill: none; stroke-width: 1.8; }
+        .icon-qrcode svg { stroke: #B366FF; fill: none; stroke-width: 1.8; }
+
+        .btn-text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* TÍTULOS EM NEGRITO (Montserrat) ~1.1rem */
+        .btn-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+            color: #F5F3F0;
+        }
+
+        /* SUBTÍTULOS com opacidade */
+        .btn-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            font-weight: 500;
+            margin-top: 2px;
+            color: #B9C7D9;
+        }
+
+        .arrow-svg {
+            width: 24px;
+            height: 24px;
+            stroke: #FFD966;
+            stroke-width: 1.8;
+            fill: none;
+            opacity: 0.8;
+            transition: transform 0.2s;
+        }
+
+        /* EFEITOS INTERATIVOS */
+        .btn-link:active {
+            transform: scale(0.97);
+            background: rgba(35, 44, 68, 0.95);
+            border-color: #FFD966;
+        }
+
+        @media (hover: hover) {
+            .btn-link:hover {
+                background: rgba(35, 44, 65, 0.95);
+                border-color: #FFDD88;
+                transform: translateY(-2px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            }
+            .btn-link:hover .arrow-svg {
+                transform: translateX(4px);
+            }
+            .btn-icon {
+                transform: scale(1.02);
+            }
+        }
+
+        /* Botão Gerador de Código com destaque especial */
+        .btn-special {
+            border-left: 4px solid #FF8C66;
+            background: linear-gradient(105deg, rgba(30, 34, 50, 0.9) 0%, rgba(20, 24, 38, 0.8) 100%);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #7b8ba3;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding-top: 1.8rem;
+        }
+
+        .footer-note p {
+            margin: 0.3rem 0;
+        }
+
+        .heart {
+            color: #FFB347;
+        }
+
+        /* ANIMAÇÃO */
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVIDADE MOBILE FIRST ===== */
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.9rem 2rem;
+            }
+            .btn-link {
+                padding: 0.85rem 1.2rem;
+            }
+            .btn-icon {
+                width: 42px;
+                height: 42px;
+            }
+            .btn-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+            .btn-title {
+                font-size: 1rem;
+            }
+            .logo-img {
+                max-width: 160px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 580px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo-wrapper">
+            <!-- Logo centralizada: arquivo "logo pdq.png" no mesmo diretório -->
+            <img class="logo-img" src="logo pdq.png" alt="Poker de Quinta - Logo PDQ" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="logo-fallback">♠️ PDQ ♥️</div>
+        </div>
+        <div class="tagline">♣️ Central de Ferramentas ♦️</div>
+    </div>
+
+    <div class="buttons-grid">
+        <!-- 1. Site Oficial -->
+        <a href="http://pokerdequinta.github.io/site" class="btn-link" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-site">
+                    <svg viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M3 12h3l2-3 3 3 3-3 2 3h3" />
+                        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
+                        <rect x="8" y="5" width="8" height="4" rx="1" />
+                        <path d="M12 3v2" />
+                        <circle cx="12" cy="12" r="2" fill="#FFD966" stroke="none" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">Site Oficial</span>
+                    <span class="btn-sub">Informações & Regras</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+
+        <!-- 2. Caderno do Dealer -->
+        <a href="http://pokerdequinta.github.io/site" class="btn-link" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-caderno">
+                    <svg viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16v12H4z" />
+                        <path d="M8 6v12M16 6v12M4 10h4M4 14h4M16 10h4M16 14h4" />
+                        <path d="M12 6v12" />
+                        <circle cx="12" cy="12" r="1.5" fill="#66D9FF" stroke="none" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">Caderno do Dealer</span>
+                    <span class="btn-sub">Controle da Mesa</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+
+        <!-- 3. Caixa (Diretoria) -->
+        <a href="http://pokerdequinta.github.io/diretoria" class="btn-link" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-caixa">
+                    <svg viewBox="0 0 24 24" stroke="currentColor">
+                        <rect x="3" y="9" width="18" height="12" rx="2" />
+                        <path d="M7 9V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" />
+                        <path d="M12 13v4" />
+                        <path d="M8 16h8" />
+                        <circle cx="12" cy="12" r="1.5" fill="#66FFA3" stroke="none" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">Caixa</span>
+                    <span class="btn-sub">Financeiro / Diretoria</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+
+        <!-- 4. Valores do Dealer -->
+        <a href="http://pokerdequinta.github.io/dealer" class="btn-link" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-valores">
+                    <svg viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 8v8M8 12h8" />
+                        <path d="M15 5l2-2M19 9l2-2M5 15l-2 2M9 19l-2 2" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="2" fill="#FF66CC" stroke="none" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">Valores do Dealer</span>
+                    <span class="btn-sub">Tabela de Pontos</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+
+        <!-- 5. Gerador de Código - destaque especial -->
+        <a href="http://pokerdequinta.github.io/geradorcodigo" class="btn-link btn-special" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-gerador">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor">
+                        <path d="M14.5 7.5L16 9L11 15L6 9L7.5 7.5L11 11L14.5 7.5Z" />
+                        <path d="M20 5H4V19H20V5Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="12" r="1.5" fill="#FFFFFF" stroke="none" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">Gerador de Código</span>
+                    <span class="btn-sub">Salas & Acesso Rápido</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+
+        <!-- 6. PIX -->
+        <a href="https://pokerdequinta.github.io/pix" class="btn-link" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-pix">
+                    <svg viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="12" cy="12" r="2.5" />
+                        <path d="M5 7.5L12 3l7 4.5v9L12 21l-7-4.5z" />
+                        <path d="M5 16.5L12 21l7-4.5" />
+                        <path d="M12 3v18" />
+                        <path d="M5 7.5v9" />
+                        <path d="M19 7.5v9" />
+                        <circle cx="12" cy="12" r="1" fill="#66FFD9" stroke="none" opacity="0.6"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">PIX</span>
+                    <span class="btn-sub">Doações / Apoio</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+
+        <!-- 7. Impressão de QR CODE - NOVO BOTÃO -->
+        <a href="#" class="btn-link" id="qrcodeBtn" target="_blank" rel="noopener noreferrer">
+            <div class="btn-left">
+                <div class="btn-icon icon-qrcode">
+                    <svg viewBox="0 0 24 24" stroke="currentColor">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                        <path d="M14 14h2v2h-2z" />
+                        <path d="M18 14h3v3h-3z" />
+                        <path d="M14 18h3v3h-3z" />
+                        <path d="M18 18h3v3h-3z" />
+                        <circle cx="6.5" cy="6.5" r="1.5" fill="#B366FF" stroke="none" opacity="0.5"/>
+                        <circle cx="17.5" cy="6.5" r="1.5" fill="#B366FF" stroke="none" opacity="0.5"/>
+                        <circle cx="6.5" cy="17.5" r="1.5" fill="#B366FF" stroke="none" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="btn-text-wrapper">
+                    <span class="btn-title">Impressão de QR CODE</span>
+                    <span class="btn-sub">Gerar e imprimir QR Codes</span>
+                </div>
+            </div>
+            <div class="arrow-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
+        </a>
+    </div>
+
+    <div class="footer-note">
+        <p>♠️ Poker de Quinta — Ação, Estratégia & Confraternização ♥️</p>
+        <p>Links oficiais • Acesse com um clique <span class="heart">♦️</span></p>
+    </div>
+</div>
+
+<script>
+    (function() {
+        console.log("🎲 Poker de Quinta | Central de Links carregada com sucesso!");
+        console.log("🎨 Identidade visual: cores #0a0c12 → #12161f + dourado #FFD966 | Fontes: Montserrat + Inter");
+        console.log("🆕 Novo botão: Impressão de QR CODE adicionado com ícone colorido!");
+        
+        // Funcionalidade para o botão de Impressão de QR CODE
+        const qrcodeBtn = document.getElementById('qrcodeBtn');
+        
+        if (qrcodeBtn) {
+            qrcodeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // URL atual para gerar QR Code
+                const currentUrl = window.location.href;
+                
+                // Serviço de QR Code gratuito
+                const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(currentUrl)}`;
+                
+                // Criar modal conforme identidade visual do Poker de Quinta
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.92);
+                    backdrop-filter: blur(8px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 9999;
+                    animation: fadeInModal 0.3s ease;
+                `;
+                
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: linear-gradient(145deg, #1a1f2e, #0f121c);
+                    border-radius: 32px;
+                    padding: 2rem;
+                    text-align: center;
+                    border: 1px solid rgba(255,215,0,0.3);
+                    max-width: 90%;
+                    width: 380px;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+                `;
+                
+                modalContent.innerHTML = `
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #FFD966; margin-bottom: 1.5rem; font-size: 1.4rem;">📱 QR Code da Central</h3>
+                    <img id="qrCodeImg" src="${qrApiUrl}" alt="QR Code Poker de Quinta" style="width: 250px; height: 250px; margin: 0 auto 1.5rem; border-radius: 20px; background: white; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                    <p style="font-family: 'Inter', sans-serif; color: #B9C7D9; margin-bottom: 1rem; font-size: 0.85rem;">Aponte a câmera do celular para acessar rapidamente a Central de Links</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button id="printQRBtn" style="background: linear-gradient(135deg, #FFD966, #FFB347); border: none; padding: 12px 24px; border-radius: 40px; font-family: 'Montserrat', sans-serif; font-weight: 700; color: #0a0c12; cursor: pointer; font-size: 0.9rem; transition: transform 0.2s;">🖨️ Imprimir QR Code</button>
+                        <button id="closeModalBtn" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,215,0,0.3); padding: 12px 24px; border-radius: 40px; font-family: 'Montserrat', sans-serif; font-weight: 600; color: #eef2ff; cursor: pointer; transition: all 0.2s;">Fechar</button>
+                    </div>
+                `;
+                
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                
+                // Função para imprimir o QR Code
+                const printQR = () => {
+                    const qrImg = document.getElementById('qrCodeImg');
+                    if (qrImg) {
+                        const printWindow = window.open('', '_blank');
+                        printWindow.document.write(`
+                            <!DOCTYPE html>
+                            <html>
+                                <head>
+                                    <title>Imprimir QR Code - Poker de Quinta</title>
+                                    <style>
+                                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                                        body { 
+                                            display: flex; 
+                                            justify-content: center; 
+                                            align-items: center; 
+                                            min-height: 100vh; 
+                                            background: white; 
+                                            font-family: 'Montserrat', 'Inter', Arial, sans-serif; 
+                                        }
+                                        .qr-container { 
+                                            text-align: center; 
+                                            padding: 30px;
+                                            border: 2px solid #FFD966;
+                                            border-radius: 32px;
+                                            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+                                        }
+                                        img { 
+                                            width: 280px; 
+                                            height: 280px; 
+                                            margin-bottom: 20px;
+                                            border-radius: 20px;
+                                        }
+                                        h2 {
+                                            color: #0a0c12;
+                                            font-family: 'Montserrat', sans-serif;
+                                            margin-bottom: 10px;
+                                        }
+                                        p { 
+                                            margin-top: 15px; 
+                                            font-size: 14px; 
+                                            color: #555;
+                                            font-family: 'Inter', sans-serif;
+                                        }
+                                        .footer {
+                                            margin-top: 20px;
+                                            font-size: 12px;
+                                            color: #888;
+                                        }
+                                    </style>
+                                </head>
+                                <body>
+                                    <div class="qr-container">
+                                        <h2>♠️ Poker de Quinta ♥️</h2>
+                                        <img src="${qrImg.src}" alt="QR Code Poker de Quinta">
+                                        <p><strong>Central de Links Oficial</strong></p>
+                                        <p>${window.location.href}</p>
+                                        <div class="footer">Aponte a câmera para acessar rapidamente todos os links</div>
+                                    </div>
+                                    <script>
+                                        window.onload = function() { 
+                                            window.print(); 
+                                            setTimeout(() => window.close(), 500);
+                                        }
+                                    <\/script>
+                                </body>
+                            </html>
+                        `);
+                        printWindow.document.close();
+                    }
+                };
+                
+                // Eventos dos botões do modal
+                document.getElementById('printQRBtn').addEventListener('click', printQR);
+                document.getElementById('printQRBtn').addEventListener('mouseenter', (e) => {
+                    e.target.style.transform = 'scale(1.02)';
+                });
+                document.getElementById('printQRBtn').addEventListener('mouseleave', (e) => {
+                    e.target.style.transform = 'scale(1)';
+                });
+                
+                document.getElementById('closeModalBtn').addEventListener('click', () => {
+                    modal.remove();
+                });
+                document.getElementById('closeModalBtn').addEventListener('mouseenter', (e) => {
+                    e.target.style.background = 'rgba(255,255,255,0.15)';
+                });
+                document.getElementById('closeModalBtn').addEventListener('mouseleave', (e) => {
+                    e.target.style.background = 'rgba(255,255,255,0.08)';
+                });
+                
+                // Fechar ao clicar fora do conteúdo
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.remove();
+                });
+            });
+        }
+        
+        // Adicionar keyframes para animação fadeInModal
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInModal {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Garantir que todos os outros links funcionem perfeitamente
+        const allLinks = document.querySelectorAll('.btn-link:not(#qrcodeBtn)');
+        allLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Navegação normal mantida
+            });
+        });
+    })();
+</script>
+</body>
+</html>
